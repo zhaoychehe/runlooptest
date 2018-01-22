@@ -34,6 +34,8 @@ typedef void(^RunloopBlock)();
     tableView.frame = self.view.frame;
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.estimatedRowHeight = CELL_HEIGHT;
+    tableView.rowHeight = CELL_HEIGHT;
     [self.view addSubview:tableView];
     self.exampleTableView = tableView;
     
@@ -107,11 +109,6 @@ typedef void(^RunloopBlock)();
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CELL_HEIGHT;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 399;
@@ -123,7 +120,6 @@ typedef void(^RunloopBlock)();
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDENTIFIER];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
     }
     
     for (UIView *v in cell.contentView.subviews) {
@@ -146,9 +142,7 @@ typedef void(^RunloopBlock)();
     return cell;
 }
 
-
 #pragma mark - runloop
-
 - (void)addTask:(RunloopBlock)task
 {
     [self.tasks addObject:task];
